@@ -1,0 +1,50 @@
+<Schema name="Esquema Incidentes">
+  <Cube name="CuboIncidentes" visible="true" cache="true" enabled="true">
+    <Table name="fact_incidente">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_ciudad" highCardinality="false" name="DimensionCiudad">
+      <Hierarchy name="JerarquiaCiudad" visible="true" hasAll="true" primaryKey="id_ciudad">
+        <Table name="dim_ciudad">
+        </Table>
+        <Level name="Estado" visible="true" column="estado" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Ciudad" visible="true" column="nombre_ciudad" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_tiempo" highCardinality="false" name="DimensionTiempo">
+      <Hierarchy name="JerarquiaTiempo" visible="true" hasAll="true" primaryKey="id_tiempo">
+        <Table name="dim_tiempo">
+        </Table>
+        <Level name="Anio" visible="true" table="dim_tiempo" column="anio" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Trimestre" visible="true" table="dim_tiempo" column="trimestre" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Mes" visible="true" table="dim_tiempo" column="mes" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Dia" visible="true" table="dim_tiempo" column="diaMes" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_involucrado" highCardinality="false" name="DimensionInvolucrado">
+      <Hierarchy name="JerarquiaEdad" visible="true" hasAll="true" primaryKey="id_involucrado">
+        <Table name="dim_involucrado">
+        </Table>
+        <Level name="Edad" visible="true" column="edad" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="JerarquiaGenero" visible="true" hasAll="true" primaryKey="id_involucrado">
+        <Table name="dim_involucrado">
+        </Table>
+        <Level name="Genero" visible="true" column="genero" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="cant_afectados" column="cant_afectados" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="cant_muertos" column="cant_muertos" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="cant_heridos" column="cant_heridos" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
